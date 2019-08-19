@@ -4,11 +4,13 @@
 #
 # Copyright:: 2019, The Authors, All Rights Reserved.
 
-package 'nginx' do
-  action :install
+apt_update 'update_sources' do
+  action :update
 end
 
+package 'nginx'
 service 'nginx' do
+  supports status: true, restart: true, reload: true
   action [:enable, :start]
 end
 
